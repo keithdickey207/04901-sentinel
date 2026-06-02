@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 import signal, sys, time, math, requests
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 import ephem
 
 OBS_LAT = "44.5520"
@@ -16,7 +16,7 @@ class Tracker:
         self.observer.lon = OBS_LON
         self.observer.elevation = OBS_ELEV
         self.last_status = None
-        self.last_update = datetime.min
+        self.last_update = datetime.min.replace(tzinfo=timezone.utc)
         self._load_tle()
         signal.signal(signal.SIGTERM, lambda s,f: sys.exit(0))
         signal.signal(signal.SIGINT, lambda s,f: sys.exit(0))
@@ -42,9 +42,10 @@ class Tracker:
         print("04901 Sentinel started")
         while True:
             try:
-                if datetime.utcnow() - self.last_update > timedelta(hours=6):
+                now = datetime.now(timezone.utc)
+                if now - self.last_update > timedelta(hours=6):
                     self._load_tle()
-                    self.last_update = datetime.utcnow()
+                    self.last_update = now
                 alt = self.get_alt()
                 status = "ONLINE" if alt > 0 else "OFFLINE"
                 if status != self.last_status:
