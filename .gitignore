@@ -38,13 +38,18 @@ env/
 .DS_Store
 Thumbs.db
 
-# Project specific for sentinel
+# Project specific for sentinel + bounty hunter
 *.log
 *.pid
 /var/log/04901-sentinel/
 /tmp/04901-sentinel.pid
-storage/
-reports/
+
+# Bounty hunter generated data (ledger + your personal research)
+# The files committed under bounty/reports/ are --mock EXAMPLES only.
+bounty/storage/
+bounty/reports/*.md
+!bounty/reports/EXAMPLE-*.md
+!bounty/reports/.gitkeep
 *.db
 
 # Secrets
