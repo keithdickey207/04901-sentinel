@@ -27,6 +27,10 @@ Both tools are designed for lightweight, local-first, always-on personal use wit
 - Rich, ready-to-use research dossier generator with simulation playbook and bounty tips
 - Easy to extend with additional parsers (HackerOne, vendor bulletins, etc.)
 
+**Phone Telemetry (Termux / Pixel)**
+- `phone/pixel_shipper.py` — Lightweight GPS location shipper that runs on your Android phone (Termux + termux-location) and streams lat/lon updates to a daemon over TCP.
+- Update your phone from GitHub with a simple `git pull` on the device (see phone/README.md).
+
 **Shared**
 - One-shot install script for the satellite daemon
 - Extensible `zero_vacuum.py` stub (encrypted logging + ntfy push notifications)
@@ -98,6 +102,9 @@ bash install.sh
 │   ├── __init__.py
 │   ├── parsers.py           # NVD (real) + mock vuln feed parsers
 │   └── monitor.py           # Bug bounty hunter: ledger + dossier generator
+├── phone/
+│   ├── pixel_shipper.py     # Termux GPS telemetry shipper (Pixel → daemon)
+│   └── README.md            # Termux setup + "update phone from GitHub" instructions
 ├── install.sh               # Sentinel daemon installer
 ├── requirements.txt
 ├── README.md
