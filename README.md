@@ -29,7 +29,9 @@ Both tools are designed for lightweight, local-first, always-on personal use wit
 
 **Phone Telemetry (Termux / Pixel)**
 - `phone/pixel_shipper.py` — Lightweight GPS location shipper that runs on your Android phone (Termux + termux-location) and streams lat/lon updates to a daemon over TCP.
-- Update your phone from GitHub with a simple `git pull` on the device (see phone/README.md).
+- `phone/termux_setup.sh` — One-shot bootstrap for Pixel 10 (installs packages, shows exact run commands).
+- `monitor.py` (repo root) — Same convenience runner you have on desktop; now also works great in Termux.
+- Full bounty hunter toolkit is now first-class on the phone. Update everything with a simple `git pull` (see phone/README.md).
 
 **Shared**
 - One-shot install script for the satellite daemon
@@ -98,20 +100,22 @@ bash install.sh
 ├── src/
 │   ├── sentinel_daemon.py   # Satellite tracker + alerting daemon
 │   └── zero_vacuum.py       # Secure logger + vault stub (ntfy)
+├── monitor.py               # Top-level convenience runner for bounty hunter (desktop + Termux)
 ├── bounty/
 │   ├── __init__.py
 │   ├── parsers.py           # NVD (real) + mock vuln feed parsers
 │   └── monitor.py           # Bug bounty hunter: ledger + dossier generator
 ├── phone/
 │   ├── pixel_shipper.py     # Termux GPS telemetry shipper (Pixel → daemon)
-│   └── README.md            # Termux setup + "update phone from GitHub" instructions
+│   ├── termux_setup.sh      # Bootstrap script for Pixel 10 / Termux (pkg + pip + usage)
+│   └── README.md            # Full "incorporate it all on your Pixel" guide + update instructions
 ├── install.sh               # Sentinel daemon installer
 ├── requirements.txt
 ├── README.md
 ├── LICENSE
 ├── CHANGELOG.md
 ├── CONTRIBUTING.md
-└── .gitignore
+└ .gitignore
 ```
 
 ## How the Tracking Works (Sentinel)
